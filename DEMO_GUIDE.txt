@@ -1,0 +1,55 @@
+CAMPUSFLOW - QUICK DEMO AND VIVA GUIDE
+Rohan Saxena | 24BCE0801
+
+START
+Extract the ZIP fully. Double-click index.html. No internet or installation is needed.
+The PDF is the six-page case study report for submission.
+
+A SIMPLE 2-3 MINUTE DEMO
+1. Keep Campus crossing selected. Click Compare all.
+   Say: "All four algorithms search the same map. BFS finds fewest moves. A* minimizes travel cost, including crowded cells and uncertainty."
+   Here BFS costs 40; A* costs 20.6. Both take 20 moves.
+2. Select Crowded laboratory. Click Compare all.
+   Say: "The cheaper path can be longer: A* takes 26 moves at cost 31, while BFS takes 20 moves at cost 50."
+3. Select Campus crossing again. Enable simulated sensor evidence and Sensor reports an obstacle.
+   Say: "Bayes' rule updates the blockage probability from 15% to 60%. A decision rule closes the purple zone at 50%."
+   Click Find route. Turn the warning off to show the posterior falling to 2.9%.
+4. Click Reset. Select A*. Click Run mission.
+   While the robot travels, click Block next route cell.
+   Say: "A new obstacle invalidates the remaining route. The robot replans from its current position, delivers the parcel and returns to the depot."
+5. Optional: choose Disconnected campus, then Find route.
+   Say: "The agent reports that no route exists instead of pretending delivery succeeded."
+
+SHORT EXPLANATION
+CampusFlow is a classical AI simulation of a delivery robot. Its state space is a campus grid. Four search algorithms choose routes, Bayes' rule updates a simulated sensor belief, and a finite-state controller manages loading, delivery and return. A new obstacle causes the agent to search again.
+
+COMMON VIVA QUESTIONS
+Why is this AI without a neural network?
+Classical AI includes intelligent agents, state-space search, heuristic reasoning, probability and planning. These are directly in this course syllabus.
+
+What does A* calculate?
+f(n) = g(n) + h(n): cost so far plus estimated remaining cost. h is Manhattan distance.
+
+Why is the heuristic valid?
+Only horizontal/vertical moves are allowed and each move costs at least 1. Manhattan distance never overestimates remaining cost.
+
+Does BFS always find the cheapest route?
+It finds the fewest moves here, but unequal terrain costs mean that may not be the cheapest route.
+
+Are the sensor readings real?
+No. The probabilities and evidence are illustrative simulation inputs. A positive report gives 60%; a negative report gives approximately 2.9%.
+
+Is this a full planning engine or an autonomous physical robot?
+It is a software simulation. A finite-state mission controller calls route search for delivery and return; it is not a general STRIPS or Graphplan implementation.
+
+FILES
+index.html - interface
+style.css - styling
+engine.js - search and probability algorithms
+app.js - map controls and mission execution
+tests/ - optional Node.js checks
+CampusFlow_AI_Case_Study.pdf - six-page report
+
+OPTIONAL CHECKS (Node.js only; not required for the demo)
+node tests/engine.test.cjs
+node tests/controller.test.cjs
